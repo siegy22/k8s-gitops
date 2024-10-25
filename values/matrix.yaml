@@ -1,0 +1,132 @@
+argoCD: true
+serverName: 'siegrist.io'
+publicServerName: 'matrix.siegrist.io'
+
+signingkey:
+  job:
+    enabled: false
+
+  existingSecret: signing-key
+
+## Matrix configuration values that affect other parts of the chart, for any
+## value not handled by this block, you will want to instead set it in
+## extraConfig below.
+## Ref: https://github.com/matrix-org/synapse/blob/develop/docs/sample_config.yaml
+##
+config:
+  ## The publicly accessible URL for the Synapse instance, will default to
+  ## https://<publicServerName>.
+  ##
+  # publicBaseurl: 'https://matrix.example.com'
+
+  ## The log level for Synapse and all modules.
+  ##
+  # logLevel: INFO
+
+  ## Should usage stats be reported
+  ##
+  reportStats: false
+
+  ## Protect registration with recaptcha. (optional)
+  ##
+  # recaptcha:
+  #   publicKey: ''
+  #   privateKey: ''
+
+  ## URIs and secret key for TURN servers to use to help establish 1:1 WebRTC
+  ## calls.
+  ##
+  # turnUris: []
+  # turnSecret: ''
+
+  ## Registration configuration, note that registration with the
+  ## container-internal register_new_matrix_user tool is always possible.
+  ##
+  # enableRegistration: false
+
+  ## NB; this value will default to a random string if not specified.
+  # registrationSharedSecret: ''
+
+  ## NB; Strongly recommended to set this to a secure value.
+  # macaroonSecretKey: ''
+
+  ## A set of trusted servers to contact if another server doesn't respond to a
+  ## signing key request.
+  ##
+  trustedKeyServers:
+    - server_name: matrix.org
+  #   verify_keys:
+  #     "ed25519:auto": "Noi6WqcDj0QmPxCNQqgezwTlBKrfqehY1u2FyWP9uYw"
+
+  ## The bind addresses to use for the default listeners
+  ##
+  # bindAddresses:
+  #   - '::'
+
+  ## Extra listeners to configure.
+  ##
+  extraListeners: []
+  #  - port: 9000
+  #    bind_addresses: ['::']
+  #    type: manhole
+
+  ## Extra listener types to add onto the main listener.
+  ##
+  extraMainListenerTypes: []
+  #  - consent
+
+  ## Logging
+  # use TerseJsonFormatter structured logging
+  # Ref: https://matrix-org.github.io/synapse/latest/structured_logging.html
+  useStructuredLogging: false
+
+## Specify arbitrary Synapse configuration here;
+## Ref: https://github.com/matrix-org/synapse/blob/develop/docs/sample_config.yaml
+##
+extraConfig:
+  app_service_config_files:
+    - /synapse/service_config_files/mautrix-whatsapp-registration.yaml
+
+synapse:
+  extraVolumes:
+    - name: service-config-files
+      secret:
+        secretName: service-config-files
+  extraVolumeMounts:
+    - name: service-config-files
+      readOnly: true
+      mountPath: "/synapse/service_config_files"
+
+wellknown:
+  enabled: true
+
+persistence:
+  enabled: true
+  size: 20Gi
+
+postgresql:
+  enabled: true
+  existingSecret: postgresql-secret
+  auth:
+    existingSecret: postgresql-secret
+
+  primary:
+    persistence:
+      size: 16Gi
+
+redis:
+  enabled: true
+  auth:
+    existingSecret: redis-secret
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  tls:
+   - secretName: matrix-tls
+     hosts:
+       - siegrist.io
+       - matrix.siegrist.io
