@@ -1,0 +1,15 @@
+# See https://medium.com/@qdrddr/argocd-app-with-helm-from-oci-repo-e52066647d99
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  name: nginx-oci-repo
+  namespace: argocd
+type: Opaque
+stringData:
+  enableOCI: 'true'
+  name: nginxinc
+  project: infra
+  type: helm
+  url: ghcr.io/nginxinc/charts
