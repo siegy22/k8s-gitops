@@ -1,0 +1,9 @@
+provider:
+  name: digitalocean
+
+env:
+  - name: DO_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: do-token
+        key: DO_TOKEN
