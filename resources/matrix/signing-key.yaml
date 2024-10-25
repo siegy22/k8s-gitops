@@ -1,0 +1,18 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: signing-key
+  namespace: matrix
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  encryptedData:
+    signing.key: AgC2IyfhLNZv+AY2gKwucHpJYXQ2YJCUO3uD/ewaPBYC+Yx+8giYsXxLuTmv8X5w6nLeoctwHWO0b06Ckiqxr+HeTZ6L9E4OYFHwMim4wpvSmRKzrNzXwsoT3sMaoU6r9zMZvDBoFVo2qtRouKZigW1nKWCJgj+hNJbiZ6SHI+4JsDcfgqwiZYZkO9E4bYpr6S8FT0Mqh9XJOTWTggkEAX5DEBk1mEZkIrzfkfMK5RedceWDAf292FJdDo6Gdv+3xY0E+zKq3g+p8KTrVeeCNgSbzmrsbIwY5103NHaVmeHwYeYgmLPDDpDOmLgfX97aERCq9KqVyftkdcq5x8VScbkm5QImqg1XhWNSPtt+/4BKaSz4pm+9Ea8zQQ2mPH8R9JU6lxYT5y2d6UdX2TtoOr2hjMRG1HCt5hPaSfYrXgXUIwfGRMxXJu+QeaVnG+kSQ+mSyJ1DS6X9Ku8NnIauiT264lD+9LdKyh8E2XFAVL41v5zQPSz5nPMUg08SWpxu7r/88a8OlCnQCNeee1AimSX68dL/0DH+bgRhOA2OPSPloHsfoAlqNHxmhbkxqz21KCKtKRXHfQc7huom34KofxFBD+uLGl0FbHdEwAQk9ogOO/o1SzcoFDUYM8L7Z0RxIKBTZ6x8tqsJah4evJ33Ki+M7AP0FSnJEhtmxVbDlZBf0PsLoUz2OdNke250G21Jrhj9is7lsYtBnLkcV8yKD4ApwlF8wVnZcrat8Y77BmX+AEFvN7u1C8hO/bifOaMjA3bHB5He1CI8dS6Q
+  template:
+    metadata:
+      creationTimestamp: null
+      name: signing-key
+      namespace: matrix
+    type: Opaque
