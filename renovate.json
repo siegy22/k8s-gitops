@@ -1,0 +1,14 @@
+{
+    "argocd": {
+        "fileMatch": ["apps/.+\\.yaml$"]
+    },
+    "customManagers": [
+        {
+            "customType": "regex",
+            "fileMatch": ["(^|\\/).*\\.ya?ml$"],
+            "matchStrings": [
+                "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s+.+([vV]ersion|[tT]ag): (?<currentValue>.*)"
+            ]
+        }
+    ]
+}
