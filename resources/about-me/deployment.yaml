@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: web
-        image: siegy22/web:1.0.0
+        image: siegy22/web:1.1.0
         ports:
-        - containerPort: 80
+        - containerPort: 8080
