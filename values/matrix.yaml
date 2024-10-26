@@ -84,6 +84,7 @@ config:
 ## Ref: https://github.com/matrix-org/synapse/blob/develop/docs/sample_config.yaml
 ##
 extraConfig:
+  suppress_key_server_warning: true
   app_service_config_files:
     - /synapse/service_config_files/mautrix-whatsapp-registration.yaml
 
