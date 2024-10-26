@@ -4,4 +4,14 @@ ingress:
   hostname: arnold.siegrist.io
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: "2g"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
   tls: true
+
+wordpressExtraConfigContent: |
+  @ini_set( 'upload_max_filesize' , '2G' );
+  @ini_set( 'post_max_size', '2G');
+  @ini_set( 'memory_limit', '256M' );
+  @ini_set( 'max_execution_time', '300' );
+  @ini_set( 'max_input_time', '300' );
