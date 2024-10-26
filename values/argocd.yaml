@@ -4,6 +4,20 @@ global:
 configs:
   params:
     server.insecure: true
+  rbac:
+    policy.csv: |
+      g, siegy22-org:default, role:admin
+  cm:
+    dex.config: |
+      connectors:
+        - type: github
+          id: github
+          name: GitHub
+          config:
+            clientID: Ov23lipIzUYuJsVUBdWM
+            clientSecret: $gh-oauth:dex.github.clientSecret
+            orgs:
+              - name: siegy22-org
 
 server:
   ingress:
