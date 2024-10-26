@@ -1,0 +1,7 @@
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  hostname: arnold.siegrist.io
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  tls: true
