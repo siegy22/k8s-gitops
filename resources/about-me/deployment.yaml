@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: about-me
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: about-me
+  template:
+    metadata:
+      labels:
+        app: about-me
+    spec:
+      containers:
+      - name: web
+        image: siegy22/web:1.0.0
+        ports:
+        - containerPort: 80

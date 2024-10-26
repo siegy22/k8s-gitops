@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: about-me-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/issuer: "letsencrypt-prod"
+spec:
+  rules:
+  - host: siegrist.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: about-me
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - siegrist.io
+    secretName: siegrist-io-tls

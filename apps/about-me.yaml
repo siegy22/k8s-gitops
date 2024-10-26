@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: about-me
+spec:
+  project: apps
+  destination:
+    namespace: about-me
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: 'https://github.com/siegy22/k8s-gitops.git'
+      path: resources/about-me
