@@ -9,9 +9,11 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
   tls: true
 
-wordpressExtraConfigContent: |
-  @ini_set( 'upload_max_filesize' , '2G' );
-  @ini_set( 'post_max_size', '2G');
-  @ini_set( 'memory_limit', '256M' );
-  @ini_set( 'max_execution_time', '300' );
-  @ini_set( 'max_input_time', '300' );
+extraVolumeMounts:
+  - name: php-ini
+    mountPath: /opt/bitnami/php/etc/conf.d
+
+extraVolumes:
+  - name: php-ini
+    configMap:
+      name: php-ini
