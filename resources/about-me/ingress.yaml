@@ -7,7 +7,7 @@ metadata:
     # See https://github.com/kubernetes-sigs/external-dns/issues/819#issuecomment-1679122051
     external-dns.alpha.kubernetes.io/ingress-hostname-source: annotation-only
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    cert-manager.io/issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
   rules:
