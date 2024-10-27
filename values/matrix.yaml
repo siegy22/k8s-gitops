@@ -8,87 +8,23 @@ signingkey:
 
   existingSecret: signing-key
 
-## Matrix configuration values that affect other parts of the chart, for any
-## value not handled by this block, you will want to instead set it in
-## extraConfig below.
-## Ref: https://github.com/matrix-org/synapse/blob/develop/docs/sample_config.yaml
-##
 config:
-  ## The publicly accessible URL for the Synapse instance, will default to
-  ## https://<publicServerName>.
-  ##
-  # publicBaseurl: 'https://matrix.example.com'
+  registrationSharedSecret: "@REGISTRATION_SHARED_SECRET@"
 
-  ## The log level for Synapse and all modules.
-  ##
-  # logLevel: INFO
-
-  ## Should usage stats be reported
-  ##
-  reportStats: false
-
-  ## Protect registration with recaptcha. (optional)
-  ##
-  # recaptcha:
-  #   publicKey: ''
-  #   privateKey: ''
-
-  ## URIs and secret key for TURN servers to use to help establish 1:1 WebRTC
-  ## calls.
-  ##
-  # turnUris: []
-  # turnSecret: ''
-
-  ## Registration configuration, note that registration with the
-  ## container-internal register_new_matrix_user tool is always possible.
-  ##
-  # enableRegistration: false
-
-  ## NB; this value will default to a random string if not specified.
-  # registrationSharedSecret: ''
-
-  ## NB; Strongly recommended to set this to a secure value.
-  # macaroonSecretKey: ''
-
-  ## A set of trusted servers to contact if another server doesn't respond to a
-  ## signing key request.
-  ##
-  trustedKeyServers:
-    - server_name: matrix.org
-  #   verify_keys:
-  #     "ed25519:auto": "Noi6WqcDj0QmPxCNQqgezwTlBKrfqehY1u2FyWP9uYw"
-
-  ## The bind addresses to use for the default listeners
-  ##
-  # bindAddresses:
-  #   - '::'
-
-  ## Extra listeners to configure.
-  ##
-  extraListeners: []
-  #  - port: 9000
-  #    bind_addresses: ['::']
-  #    type: manhole
-
-  ## Extra listener types to add onto the main listener.
-  ##
-  extraMainListenerTypes: []
-  #  - consent
-
-  ## Logging
-  # use TerseJsonFormatter structured logging
-  # Ref: https://matrix-org.github.io/synapse/latest/structured_logging.html
-  useStructuredLogging: false
-
-## Specify arbitrary Synapse configuration here;
-## Ref: https://github.com/matrix-org/synapse/blob/develop/docs/sample_config.yaml
-##
 extraConfig:
   suppress_key_server_warning: true
   app_service_config_files:
     - /synapse/service_config_files/mautrix-whatsapp-registration.yaml
 
 synapse:
+  extraCommands:
+    - sed -i -e 's/@REGISTRATION_SHARED_SECRET@/'"${REGISTRATION_SHARED_SECRET}"'/g' /synapse/config/conf.d/secrets.yaml
+  extraEnv:
+    - name: REGISTRATION_SHARED_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: registration-shared-secret
+          key: REGISTRATION_SHARED_SECRET
   extraVolumes:
     - name: service-config-files
       secret:
