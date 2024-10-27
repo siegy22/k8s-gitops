@@ -4,7 +4,7 @@ wordpressPassword: "__unused__"
 service:
   type: ClusterIP
 
-resourcesPreset: nano
+resourcesPreset: none
 persistence:
   size: 4Gi
 
@@ -12,7 +12,7 @@ mariadb:
   auth:
     existingSecret: mariadb-credentials
   primary:
-    resourcesPreset: nano
+    resourcesPreset: none
     persistence:
       size: 500Mi
 
