@@ -1,3 +1,6 @@
+# Add for idempotency in ArgoCD, the password is not actually used.
+wordpressPassword: "__unused__"
+
 service:
   type: ClusterIP
 
