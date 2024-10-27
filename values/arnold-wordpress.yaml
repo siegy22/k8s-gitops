@@ -8,6 +8,8 @@ persistence:
   size: 2Gi
 
 mariadb:
+  auth:
+    existingSecret: mariadb-credentials
   primary:
     persistence:
       size: 500Mi
