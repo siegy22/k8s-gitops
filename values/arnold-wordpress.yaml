@@ -5,7 +5,7 @@ service:
   type: ClusterIP
 
 persistence:
-  size: 2Gi
+  size: 4Gi
 
 mariadb:
   auth:
