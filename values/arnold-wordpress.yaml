@@ -1,6 +1,14 @@
 service:
   type: ClusterIP
 
+persistence:
+  size: 2Gi
+
+mariadb:
+  primary:
+    persistence:
+      size: 500Mi
+
 ingress:
   enabled: true
   ingressClassName: "nginx"
