@@ -2,3 +2,24 @@ controller:
   replicaCount: 2
   metrics:
     enabled: true
+
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - '{{ include "ingress-nginx.name" . }}'
+            - key: app.kubernetes.io/instance
+              operator: In
+              values:
+              - '{{ .Release.Name }}'
+            - key: app.kubernetes.io/component
+              operator: In
+              values:
+              - controller
+          topologyKey: kubernetes.io/hostname
