@@ -12,9 +12,32 @@ spec:
       labels:
         app: about-me
     spec:
+      serviceAccountName: about-me-sa
       containers:
       - name: web
-        # renovate: datasource=docker depName=siegy22/web
         image: siegy22/web:1.1.0
         ports:
-        - containerPort: 8080
+        - name: web-port
+          containerPort: 8080
+        resources:
+          requests:
+            cpu: "20m"
+            memory: "10Mi"
+          limits:
+            cpu: "50m"
+            memory: "20Mi"
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 101
+        livenessProbe:
+          httpGet:
+            path: /
+            port: web-port
+          initialDelaySeconds: 2
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: web-port
+          initialDelaySeconds: 2
+          periodSeconds: 10
