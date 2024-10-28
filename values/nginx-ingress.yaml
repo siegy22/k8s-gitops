@@ -2,7 +2,9 @@ controller:
   replicaCount: 2
   metrics:
     enabled: true
-
+  podAnnotations:
+    prometheus.io/port: "10254"
+    prometheus.io/scrape: "true"
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
