@@ -3,6 +3,8 @@ kind: AppProject
 metadata:
   name: infra
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   description: Infrastructure Apps
   sourceRepos:
@@ -19,6 +21,8 @@ kind: AppProject
 metadata:
   name: apps
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   description: Generic Applications
   sourceRepos:
@@ -35,6 +39,8 @@ kind: AppProject
 metadata:
   name: on-prem-infra
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   description: On-premise Infrastructure Apps
   sourceRepos:
@@ -51,6 +57,8 @@ kind: AppProject
 metadata:
   name: on-prem-apps
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   description: On-premise cluster applications
   sourceRepos:
