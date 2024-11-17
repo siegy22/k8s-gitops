@@ -20,7 +20,7 @@ configs:
             orgs:
               - name: siegy22-org
 
-server:
+controller:
   volumes:
     - name: wireguard-secret
       secret:
@@ -28,18 +28,16 @@ server:
   extraContainers:
     - image: linuxserver/wireguard:latest
       name: wireguard
-      ports:
-      - containerPort: 51820
       securityContext:
         capabilities:
           add:
             - NET_ADMIN
-            - SYS_MODULE
         privileged: true
       volumeMounts:
         - mountPath: "/config/wg_confs"
           name: wireguard-secret
 
+server:
   ingress:
     enabled: true
     ingressClassName: nginx
