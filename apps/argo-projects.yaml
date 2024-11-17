@@ -33,6 +33,22 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
+  name: on-prem-infra
+  namespace: argocd
+spec:
+  description: On-premise Infrastructure Apps
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: '*'
+    server: bootc
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
   name: on-prem-apps
   namespace: argocd
 spec:
