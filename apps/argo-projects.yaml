@@ -29,3 +29,19 @@ spec:
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: on-prem-apps
+  namespace: argocd
+spec:
+  description: On-premise cluster applications
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: '*'
+    name: bootc
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'

@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb
+spec:
+  project: on-prem-apps
+  destination:
+    namespace: metallb-system
+    name: bootc
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: 'https://metallb.github.io/metallb'
+      chart: metallb
+      targetRevision: 0.14.8
