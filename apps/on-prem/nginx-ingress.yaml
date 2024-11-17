@@ -6,7 +6,7 @@ spec:
   project: on-prem-infra
   destination:
     namespace: kube-system
-    server: bootc
+    name: bootc
   syncPolicy:
     automated: {}
     syncOptions:
