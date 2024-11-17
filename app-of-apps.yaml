@@ -13,3 +13,5 @@ spec:
   source:
     repoURL: 'https://github.com/siegy22/k8s-gitops.git'
     path: apps
+    directory:
+      recurse: true
