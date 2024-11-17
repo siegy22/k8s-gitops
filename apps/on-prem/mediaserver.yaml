@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mediaserver
+spec:
+  project: on-prem-apps
+  destination:
+    namespace: mediaserver
+    name: bootc
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: 'https://github.com/kubealex/k8s-mediaserver-operator.git'
+      path: helm-charts/k8s-mediaserver
+      helm:
+        valueFiles:
+          - '$values/values/on-prem/mediaserver.yaml'
+    - repoURL: 'https://github.com/siegy22/k8s-gitops.git'
+      targetRevision: main
+      ref: values

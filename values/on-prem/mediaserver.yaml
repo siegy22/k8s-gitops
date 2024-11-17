@@ -1,0 +1,13 @@
+general:
+  ingress_host: media.androme.da
+  plex_ingress_host: plex.androme.da
+  storage:
+    accessMode: "ReadWriteOnce"
+    size: 2Ti
+    pvcStorageClass: "local-path"
+  ingress:
+    ingressClassName: "nginx"
+
+plex:
+  service:
+    type: LoadBalancer
