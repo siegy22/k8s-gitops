@@ -47,7 +47,7 @@ spec:
   - '*'
   destinations:
   - namespace: '*'
-    server: bootc
+    name: bootc
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
