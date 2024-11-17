@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress
+spec:
+  project: on-prem-infra
+  destination:
+    namespace: kube-system
+    server: bootc
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: 'https://kubernetes.github.io/ingress-nginx'
+      chart: ingress-nginx
+      targetRevision: 4.11.3
