@@ -1,0 +1,15 @@
+ipam:
+  operator:
+    clusterPoolIPv4PodCIDRList: "10.42.0.0/16"
+
+cni:
+  binPath: /var/opt/cni/bin
+
+operator:
+  replicas: 1
+
+hubble:
+  relay:
+    enabled: true
+  ui:
+    enabled: true
