@@ -14,7 +14,7 @@ spec:
   sources:
     - repoURL: 'https://ananace.gitlab.io/charts'
       chart: matrix-synapse
-      targetRevision: 3.10.0
+      targetRevision: 3.10.1
       helm:
         valueFiles:
           - '$values/values/matrix.yaml'
