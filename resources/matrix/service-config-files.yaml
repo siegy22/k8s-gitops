@@ -1,16 +1,8 @@
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
+kind: OnePasswordItem
 metadata:
-  creationTimestamp: null
   name: service-config-files
   namespace: matrix
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
-  encryptedData:
-    mautrix-whatsapp-registration.yaml: AgB4Pg/3HsSfYzBaT2Mwys/ifRED17R0jYxVAU8uua7R8NVjpyqU/2EqXzbV0qJLAI0RLQ2dEzVVzHjqlCU6SdLVxGRLFF+ugZ5v/KaOc5FvnRGuOQ/4mzBdNKhIqjJxcT5gh2lKfwKYUltEGnKcApvAPfnnTKQ/VnFsreR5/9fv9SFBRhjNOP6nZmaSW3roCF9MZ2UygoOtzg8gmCQgb1WNmVZFriAyrClLnMc2Ho4zUiiNy8Yv5vrSIw+UK81yA7x6r9ddTQG5mkqgYu2hw8YW6bNIv5ouxcqWCwjAWXhMTV3x9lR3I5dysAqB3r+e7p5P8FgU7Zu14Mmye+d9r39GJ0XUcyjg6jNruUDfsnHwOYkSJ3d+ubrsRLHQ6mtHNCPXRH+BDEIPxRMLJr7fZuVvEZdLCLLoR7b6b8LQ8nYubo5MzzJ4be/fSXhOmxJgb26b6rWojEOQwTiPBiPd8E1/t3y9CkchpHfw0V6oaW2RuqHmaC7FhxJp7KZeyTJN4S/dh8uv/G0XYhi6NteNzE7gz6F+eT1NGMLQEdnuXgDy2M6Mw2jjhCELe5ynvU+W9Nlx5bYvJ3r8vQNSI+eU8gYEFHPckbDEGbOpYMsJWivT2aYdd+62PTCd3R0DPEnLFZoPfUofsnP2D2FIbfyHzzZsYW7o6e3cdNv3oSROlsad/QqAtwGamunKvwuJsaGVK6BGx0PCBEOSVXB+8VHfQJVA5VCPpaPlH9G5Oq+8D0SbmwesgLSnOdSoWE+0I06XuKADejT9VDS0gCBgJ3b2xeFG/eVVy8gme8sJdHLLHn0xRA5qIll4vLwd/VW3xtXsfyRMd5FRy/jieXmJwOuRPAXMhgx26wc6+LNNb11uC29f82/LaXPKO3uGWceKNQ25U5F/omer+Ds8TrI2FicYPEU6YD0porQYeyD41pAkV/X6pDFSQgaMOfXxwiEsw4lzYMfGfRdC90olSam5KsRVYzlkt96F5IXb2c+sKBIKPIKE6wHJxeLzbXC28sF52d2TCLuDvU6RDj33aw7j+vnI90Pv5oFyqJADU47cZR4X1TEitTgN76PXKF5962/q/ijcP4wiiwEs49H5Riea1qOHWAy9IOy2+qto5bviUvcfwPkX+UFt80PG3psScNRVymJeh34O1q07OH0+Yg8+XhotzkGOW7jd7OrrJLlbmC1jL151uLtf0XYYpABkeNpmcodg0FRZgoSV7L5Qp4yR5B1V5HFqgiXcI7oWedOyI3KL98HLPFD9svD2SElqmLUtDOXHMwjZYHD0zuSecsSe/mmuGr7xCa7lIX9PDnu6KX/MobqFlf56vroqPI9WPIpEK4yj
-  template:
-    metadata:
-      creationTimestamp: null
-      name: service-config-files
-      namespace: matrix
-    type: Opaque
+  itemPath: "vaults/k8s/items/matrix-service-config-files"

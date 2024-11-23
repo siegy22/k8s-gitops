@@ -20,4 +20,4 @@ spec:
         digitalocean:
           tokenSecretRef:
             name: digitalocean-dns
-            key: access-token
+            key: DO_TOKEN

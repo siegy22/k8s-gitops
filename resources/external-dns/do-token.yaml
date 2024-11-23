@@ -1,16 +1,8 @@
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
+kind: OnePasswordItem
 metadata:
-  creationTimestamp: null
   name: do-token
   namespace: external-dns
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
-  encryptedData:
-    DO_TOKEN: AgBj75ZHG7b6mRj5vBmzyE1LDVcpC1Q4Kjo8NWmmFUsjAuVlFnBjWMhiZTVCuXiJMtVGUtYXrtoFCKRBaFjUbgqpozHOFqSexNDf+rOJ3iIdgm372Jppr+Amrc24+6R7RPB+1MX5Vbi1873ih0un7OJahThfe01ke6Pw8IyX97Lw5cRFP/3KTuiRiFIQEMc7RpjLe9kk7EJOQHLJPNh8C/JbOEv75T8jfMsj9p7QBhzEivfS6AKgmxsHRjG7moagsxAgmC5UgeCF+rQyWc/s0Aa1662E7Q7+pnihS0AhkYELMVFrp+Jo51eSiePvl+L4mLi1JyrSz7DSz2Y7Dd8vdmj/FEaS+DLGSn6bxkTmXREOsAKX8sHFqarhiSUTR24f79r+mkJAtBrZdoIZSChQ1ePV8llzfPyBMyqbZH4nGxatldg8CGB3baD5NJNyn6lkNlZ45ompfBIejOZKArTyyxcVhgVrCtHJ2Q/bRpBNtAZW0iT1tLzs8iOujHvCLFh3mVv+wp+X86DGhpV44FXlQ1IIxM7fWizEzd0Nau5r0bqvGNWIl/ZVfeCvK62P6U4NViaBI3AZ+K+19RbISVJLT2gGgQT8hddKBoENP+YmkIVhCtCQ3aCB1ar0ZN53cK8nw/d8AOFlYQ/Il1UXeYqOVX7JUHhPoTmN286aZZ12gohm3ravqxnmDN8HXkqB+w2azjlk4N7obPhJeJKYZruabDzjQ4g+Lr/9KjzvI/x0AmkeAeX2nqf5NjG9YPApizUnov6Zv/9Al3l3/6iIM6NPmlfb/I/VmR2ULQ==
-  template:
-    metadata:
-      creationTimestamp: null
-      name: do-token
-      namespace: external-dns
-    type: Opaque
+  itemPath: "vaults/k8s/items/do-dns-token"

@@ -1,18 +1,8 @@
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
+kind: OnePasswordItem
 metadata:
-  creationTimestamp: null
   name: gh-oauth
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
-  encryptedData:
-    dex.github.clientSecret: AgCSmLpHbAYJxYB2yhfYAS2Iime177dP/VGErCMfz5uBLtBZgl0AT9qvikLt/WMbVRaetCi8YESXE9ZwmxTy9h2CzIOvSqoADYEXXVq5r2IlxfrALjOgzCuP4xlkQiMCCj4hg55BahzdRMFrFb89Y8Dj1dooszjkpn+0UuVfwMmIsM/Omy/6ET8qOhtINiuTUen5lblK0pgsyGSCPFXi0g+gfK8fwtqyYrMmU64duFrd3ITlWDNHg0IH4ZaSKrxNMbEADfiNYez2cd9uuZXE5zUfeO5rQ5xCVZFaPTnk41W/UBGQC5379neX7kDffKZzuGYFN5YG1/QTB5BTb78QKFvpxhDb6VdsW5RSVIL0CvPesjSbI3E2nvPjAR7x5CRKf7wlqe8Jl4ma+WPv0hhly02xKqbdC9D2zIl7WjgzSJsmf5viCGv2sDitPfp95SIvQLwRc8/dGPjv//RnsOKZpHR/WrgjfJ8SM/i4N99FSOXUnfFVrRdjZCTtb8SnKK2K5nYwQ+Ujzr0wzoOKXXsqo7X8N7BAI6Wok9uqU09Y3z01TUelgB45i5PGsfpWJihbPGzIVup5ICKuzvWsheg3zXpVAaiQOPnvYYrBAZQgD1XxAQngAF3u0QA9zLXOu/iZZ7QSSxW5o+tMdHvwlnJvBDUV4l0ZJLuGBLtO+SbbkMlJLTwfu5Uzd4AalChTsvuePI8qLhDZ9qdsaq6+LraWtGWmUQRiniF2Y3p68AO/OpKh/AhXMTVJw266
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app.kubernetes.io/part-of: argocd
-      name: gh-oauth
-      namespace: argocd
-    type: Opaque
+  itemPath: "vaults/k8s/items/argocd-github-oauth"
