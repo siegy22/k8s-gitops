@@ -4,7 +4,8 @@ controller:
   service:
     annotations:
       service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
-
+  extraArgs:
+    enable-ssl-passthrough: "true"
   kind: DaemonSet
   metrics:
     enabled: true
