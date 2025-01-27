@@ -1,6 +1,7 @@
 apiVersion: v2
 type: application
-appVersion: v0.10.9
+# renovate: datasource=docker depName=dock.mau.dev/mautrix/whatsapp
+appVersion: v0.11.2
 description: A Matrix-WhatsApp puppeting bridge https://maunium.net/go/mautrix-whatsapp
 name: mautrix-whatsapp
 version: 1.7.0
