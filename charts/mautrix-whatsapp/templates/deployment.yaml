@@ -52,8 +52,6 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}"
-          args:
-            - "--no-update"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
