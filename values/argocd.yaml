@@ -8,7 +8,7 @@ configs:
     policy.csv: |
       g, siegy22-org:default, role:admin
   cm:
-    admin.enabled: false
+    admin.enabled: true
     dex.config: |
       connectors:
         - type: github
