@@ -4,6 +4,7 @@ ipam:
 
 cni:
   binPath: /var/opt/cni/bin
+  exclusive: false
 
 operator:
   replicas: 1
