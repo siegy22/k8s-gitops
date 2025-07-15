@@ -57,6 +57,7 @@ redis:
     existingSecret: redis-secret
 
 ingress:
+  includeServerName: false
   enabled: true
   className: nginx
   annotations:
