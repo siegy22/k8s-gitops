@@ -67,3 +67,6 @@ ingress:
    - hosts:
       - loki-gateway.siegrist.io
      secretName: loki-tls
+
+resultsCache:
+  allocatedMemory: 128
