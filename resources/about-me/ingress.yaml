@@ -9,27 +9,23 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/enable-modsecurity: "true"
-    nginx.ingress.kubernetes.io/enable-owasp-core-rules: "true"
-    # nginx.ingress.kubernetes.io/modsecurity-snippet: |
-    #   # format the logs in JSON
-    #   SecAuditLogFormat JSON
+    nginx.ingress.kubernetes.io/modsecurity-snippet: |
+      Include /etc/nginx/owasp-modsecurity-crs/nginx-modsecurity.conf
+      # Enable prevention mode. Options: DetectionOnly,On,Off (default is DetectionOnly)
+      SecRuleEngine On
 
-    #   Include /etc/nginx/owasp-modsecurity-crs/nginx-modsecurity.conf
-    #   # Enable prevention mode. Options: DetectionOnly,On,Off (default is DetectionOnly)
-    #   SecRuleEngine On
+      # Enable scanning of the request body
+      SecRequestBodyAccess On
 
-    #   # Enable scanning of the request body
-    #   SecRequestBodyAccess On
+      # Enable XML and JSON parsing
+      SecRule REQUEST_HEADERS:Content-Type "(?:text|application(?:/soap\+|/)|application/xml)/" \
+        "id:200000,phase:1,t:none,t:lowercase,pass,nolog,ctl:requestBodyProcessor=XML"
 
-    #   # Enable XML and JSON parsing
-    #   SecRule REQUEST_HEADERS:Content-Type "(?:text|application(?:/soap\+|/)|application/xml)/" \
-    #     "id:200000,phase:1,t:none,t:lowercase,pass,nolog,ctl:requestBodyProcessor=XML"
+      SecRule REQUEST_HEADERS:Content-Type "application/json" \
+        "id:200001,phase:1,t:none,t:lowercase,pass,nolog,ctl:requestBodyProcessor=JSON"
 
-    #   SecRule REQUEST_HEADERS:Content-Type "application/json" \
-    #     "id:200001,phase:1,t:none,t:lowercase,pass,nolog,ctl:requestBodyProcessor=JSON"
-
-    #   SecRule REMOTE_ADDR "@ipMatch 47.74.0.0/16,47.75.0.0/16,47.76.0.0/16,47.77.0.0/16,47.78.0.0/16,47.79.0.0/16,47.80.0.0/16,47.81.0.0/16,47.82.0.0/16,47.83.0.0/16,47.84.0.0/16,47.85.0.0/16,47.86.0.0/16,47.87.0.0/16,47.88.0.0/16,47.89.0.0/16,47.90.0.0/16,47.91.0.0/16,47.92.0.0/16,47.93.0.0/16,47.94.0.0/16,47.95.0.0/16,85.195.0.0/16" \
-    #     "id:100001,phase:1,deny,log,status:403,msg:\"Blocked Alibaba Cloud IP ranges (47.74.0.0/16 - 47.95.0.0/16)\""
+      SecRule REMOTE_ADDR "@ipMatch 47.74.0.0/16,47.75.0.0/16,47.76.0.0/16,47.77.0.0/16,47.78.0.0/16,47.79.0.0/16,47.80.0.0/16,47.81.0.0/16,47.82.0.0/16,47.83.0.0/16,47.84.0.0/16,47.85.0.0/16,47.86.0.0/16,47.87.0.0/16,47.88.0.0/16,47.89.0.0/16,47.90.0.0/16,47.91.0.0/16,47.92.0.0/16,47.93.0.0/16,47.94.0.0/16,47.95.0.0/16,85.195.0.0/16" \
+        "id:100001,phase:1,deny,log,status:403,msg:\"Blocked Alibaba Cloud IP ranges (47.74.0.0/16 - 47.95.0.0/16)\""
 
 spec:
   ingressClassName: nginx
