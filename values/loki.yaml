@@ -52,3 +52,18 @@ bloomCompactor:
   replicas: 0
 bloomGateway:
   replicas: 0
+
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  hostname: loki-gateway.siegrist.io
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: "80m"
+  hosts:
+    - loki-gateway.siegrist.io
+  # -- TLS configuration for the ingress. Hosts passed through the `tpl` function to allow templating
+  tls:
+   - hosts:
+      - loki-gateway.siegrist.io
+     secretName: loki-tls
