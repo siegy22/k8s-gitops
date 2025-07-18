@@ -8,6 +8,7 @@ metadata:
     external-dns.alpha.kubernetes.io/ingress-hostname-source: annotation-only
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
 spec:
   ingressClassName: nginx
   rules:
