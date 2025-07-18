@@ -11,7 +11,7 @@ data:
 
     loki.source.file "log_scrape" {
       targets    = local.file_match.local_files.targets
-      forward_to = [loki.process.filter_logs.receiver]
+      forward_to = [loki.process.label_logs.receiver]
       tail_from_end = true
     }
 
@@ -21,11 +21,11 @@ data:
       }
     }
 
-    loki.process "filter_logs" {
-      stage.drop {
-        source = ""
-        expression  = ".*Connection closed by authenticating user root"
-        drop_counter_reason = "noisy"
+    loki.process "label_logs" {
+      stage.labels {
+        values = {
+          job = "modsecurity",
+        }
       }
       forward_to = [loki.write.grafana_loki.receiver]
     }
