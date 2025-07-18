@@ -9,8 +9,23 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/enable-modsecurity: "true"
+    # nginx.ingress.kubernetes.io/enable-owasp-core-rules: "true"
     nginx.ingress.kubernetes.io/modsecurity-snippet: |
       Include /etc/nginx/owasp-modsecurity-crs/nginx-modsecurity.conf
+      # Enable prevention mode. Options: DetectionOnly,On,Off (default is DetectionOnly)
+      SecRuleEngine On
+
+      # Enable scanning of the request body
+      SecRequestBodyAccess On
+
+      # Enable XML and JSON parsing
+      SecRule REQUEST_HEADERS:Content-Type "(?:text|application(?:/soap\+|/)|application/xml)/" \
+        "id:200000,phase:1,t:none,t:lowercase,pass,nolog,ctl:requestBodyProcessor=XML"
+
+      SecRule REQUEST_HEADERS:Content-Type "application/json" \
+        "id:200001,phase:1,t:none,t:lowercase,pass,nolog,ctl:requestBodyProcessor=JSON"
+
+      # format the logs in JSON
       SecAuditLogFormat JSON
 
 spec:
