@@ -17,7 +17,8 @@ controller:
     - name: grafana-alloy
       image: grafana/alloy:latest
       args:
-        - run /etc/alloy/audit-logs.alloy
+        - run
+        - /etc/alloy/audit-logs.alloy
       volumeMounts:
         - name: audit-logs
           mountPath: /var/log/audit
