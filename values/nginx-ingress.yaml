@@ -13,3 +13,23 @@ controller:
       enabled: true
       additionalLabels:
         release: monitoring
+  extraContainers:
+    - name: grafana-alloy
+      image: grafana/alloy:latest
+      args:
+        - --config.file=/etc/alloy/audit-logs.alloy
+      volumeMounts:
+        - name: audit-logs
+          mountPath: /var/log/audit
+        - name: alloy-config
+          mountPath: /etc/alloy
+  extraVolumeMounts:
+    - name: audit-logs
+      mountPath: /var/log/audit
+  extraVolumes:
+    - name: audit-logs
+      emptyDir:
+        sizeLimit: 1Gi
+    - name: alloy-config
+      configMap:
+        name: alloy-audit-config
