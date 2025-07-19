@@ -5,8 +5,7 @@ controller:
         secretKeyRef:
           key: MAXMIND_LICENSE_KEY
           name: maxmind
-  extraArgs:
-    maxmind-license-key: "${MAXMIND_LICENSE_KEY}"
+  maxmindLicenseKey: "$(MAXMIND_LICENSE_KEY)"
   config:
     use-proxy-protocol: "true"
     use-geoip2: "true"
