@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: alloy
+spec:
+  project: infra
+  destination:
+    namespace: loki
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  sources:
+    - repoURL: 'https://grafana.github.io/helm-charts'
+      chart: k8s-monitoring
+      targetRevision: 3.1.3
+      helm:
+        valueFiles:
+          - '$values/values/alloy.yaml'
+    - repoURL: 'https://github.com/siegy22/k8s-gitops.git'
+      targetRevision: main
+      ref: values
