@@ -1,5 +1,5 @@
 cluster:
-  name: "alloy"
+  name: do-fra1-ysi
 
 alloy-logs:
   enabled: true
