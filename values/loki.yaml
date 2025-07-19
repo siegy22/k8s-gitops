@@ -69,5 +69,8 @@ ingress:
       - loki-gateway.siegrist.io
      secretName: loki-tls
 
+chunksCache:
+  writebackSizeLimit: 10MB
+
 resultsCache:
   allocatedMemory: 128
