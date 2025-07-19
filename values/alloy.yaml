@@ -1,3 +1,6 @@
+cluster:
+  name: "alloy"
+
 alloy-logs:
   enabled: true
 
