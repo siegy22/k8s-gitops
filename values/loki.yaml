@@ -71,6 +71,4 @@ ingress:
 
 chunksCache:
   writebackSizeLimit: 10MB
-
-resultsCache:
   allocatedMemory: 128
