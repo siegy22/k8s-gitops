@@ -12,4 +12,4 @@ podLogs:
 destinations:
   - name: loki
     type: loki
-    url: https://loki:9100/loki/api/v1/push
+    url: http://loki:3100/loki/api/v1/push
