@@ -37,6 +37,9 @@ metadata:
 
       # could be On/Off/RelevantOnly
       SecAuditEngine RelevantOnly
+
+      SecRule GEO:COUNTRY_CODE "@pm CH CHE" \
+        "id:10001,phase:1,deny,log,status:403,msg:\"Block Switzerland\""
 spec:
   ingressClassName: nginx
   rules:
