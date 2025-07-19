@@ -1,6 +1,16 @@
 controller:
+  extraEnvs:
+    - name: MAXMIND_LICENSE_KEY
+      valueFrom:
+        secretKeyRef:
+          key: MAXMIND_LICENSE_KEY
+          name: maxmind
+  extraArgs:
+    maxmind-license-key: "${MAXMIND_LICENSE_KEY}"
   config:
     use-proxy-protocol: "true"
+    use-geoip2: "true"
+    geoip2-autoreload-in-minutes: 1440
     strict-validate-path-type: "false"
   service:
     annotations:
