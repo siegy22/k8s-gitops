@@ -38,8 +38,13 @@ metadata:
       # could be On/Off/RelevantOnly
       SecAuditEngine RelevantOnly
 
-      SecRule GEO:COUNTRY_CODE "@pm CH CHE" \
-        "id:10001,phase:1,deny,log,status:403,msg:\"Block Switzerland\""
+      SecRule REMOTE_ADDR "@ipMatch 47.74.0.0/16,47.75.0.0/16,47.76.0.0/16,47.77.0.0/16,47.78.0.0/16,47.79.0.0/16,47.80.0.0/16,47.81.0.0/16,47.82.0.0/16,47.83.0.0/16,47.84.0.0/16,47.85.0.0/16,47.86.0.0/16,47.87.0.0/16,47.88.0.0/16,47.89.0.0/16,47.90.0.0/16,47.91.0.0/16,47.92.0.0/16,47.93.0.0/16,47.94.0.0/16,47.95.0.0/16" \
+        "id:10001,phase:1,deny,log,status:403,msg:\"Block Alibaba Cloud IP ranges (47.74.0.0/16 - 47.95.0.0/16)\""
+
+      SecGeoLookupDb /etc/ingress-controller/geoip/GeoLite2-City.mmdb
+      SecRule REMOTE_ADDR "@geoLookup" "phase:1,id:155,nolog,pass"
+      SecRule GEO:COUNTRY_CODE "@streq CH" \
+        "id:156,phase:1,deny,log,status:403,msg:\"Block Switzerland\""
 spec:
   ingressClassName: nginx
   rules:
