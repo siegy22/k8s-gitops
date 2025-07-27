@@ -11,7 +11,14 @@ controller:
     use-geoip2: "true"
     geoip2-autoreload-in-minutes: 1440
     strict-validate-path-type: "false"
-    log-format-upstream: '$country_code $country_name $remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $request_length $request_time [$proxy_upstream_name] [$proxy_alternative_upstream_name] $upstream_addr $upstream_response_length $upstream_response_time $upstream_status $req_id '
+    log-format-escape-json: "true"
+    log-format-upstream: '{"timestamp": "$time_iso8601", "requestID": "$req_id", "proxyUpstreamName":
+    "$proxy_upstream_name", "proxyAlternativeUpstreamName": "$proxy_alternative_upstream_name","upstreamStatus":
+    "$upstream_status", "upstreamAddr": "$upstream_addr","httpRequest":{"requestMethod":
+    "$request_method", "requestUrl": "$host$request_uri", "status": $status,"requestSize":
+    "$request_length", "responseSize": "$upstream_response_length", "userAgent": "$http_user_agent",
+    "remoteIp": "$remote_addr", "countryCode": "$geoip2_city_country_code", "regionName": "$geoip2_region_name",
+    "referer": "$http_referer", "latency": "$upstream_response_time s", "protocol": "$server_protocol"}}'
   service:
     annotations:
       service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
