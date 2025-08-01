@@ -38,13 +38,30 @@ controller:
     - name: custom-ip-blacklist
       configMap:
         name: custom-ip-blacklist
-    - name: malicious-ip-lists
-      persistentVolumeClaim:
-        claimName: malicious-ip-lists
+    - name: malicious-ip
+      emptyDir: {}
   extraVolumeMounts:
     - name: modsecurity-configs
       mountPath: /etc/nginx/modsecurity-configs
     - name: custom-ip-blacklist
       mountPath: /etc/custom-ip-blacklist
-    - name: malicious-ip-lists
+    - name: malicious-ip
       mountPath: /etc/malicious-ip
+  extraContainers:
+    - name: malicious-ip-updater
+      image: curlimages/curl:latest
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          while true; do
+            echo "[$(date)] Downloading malicious IP lists..."
+            curl -sSLo /etc/malicious-ip/full-300k-aa.txt https://raw.githubusercontent.com/romainmarcoux/malicious-ip/main/full-300k-aa.txt
+            curl -sSLo /etc/malicious-ip/full-300k-ab.txt https://raw.githubusercontent.com/romainmarcoux/malicious-ip/main/full-300k-ab.txt
+            curl -sSLo /etc/malicious-ip/full-300k-ac.txt https://raw.githubusercontent.com/romainmarcoux/malicious-ip/main/full-300k-ac.txt
+            echo "[$(date)] Done. Sleeping for 1 hour..."
+            sleep 3600
+          done
+      volumeMounts:
+        - name: malicious-ip
+          mountPath: /etc/malicious-ip
+
