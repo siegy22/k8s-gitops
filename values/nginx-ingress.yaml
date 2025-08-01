@@ -58,6 +58,7 @@ controller:
             curl -sSLo /etc/malicious-ip/full-300k-aa.txt https://raw.githubusercontent.com/romainmarcoux/malicious-ip/main/full-300k-aa.txt
             curl -sSLo /etc/malicious-ip/full-300k-ab.txt https://raw.githubusercontent.com/romainmarcoux/malicious-ip/main/full-300k-ab.txt
             curl -sSLo /etc/malicious-ip/full-300k-ac.txt https://raw.githubusercontent.com/romainmarcoux/malicious-ip/main/full-300k-ac.txt
+            curl -sSLo /etc/malicious-ip/full-300k-ad.txt https://raw.githubusercontent.com/romainmarcoux/malicious-ip/main/full-300k-ad.txt
             echo "[$(date)] Done. Sleeping for 1 hour..."
             sleep 3600
           done
