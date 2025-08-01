@@ -31,3 +31,20 @@ controller:
       enabled: true
       additionalLabels:
         release: monitoring
+  extraVolumes:
+    - name: modsecurity-configs
+      configMap:
+        name: modsecurity-configs
+    - name: custom-ip-blacklist
+      configMap:
+        name: custom-ip-blacklist
+    - name: malicious-ip-lists
+      persistentVolumeClaim:
+        claimName: malicious-ip-lists
+  extraVolumeMounts:
+    - name: modsecurity-configs
+      mountPath: /etc/nginx/modsecurity-configs
+    - name: custom-ip-blacklist
+      mountPath: /etc/custom-ip-blacklist
+    - name: malicious-ip-lists
+      mountPath: /etc/malicious-ip
