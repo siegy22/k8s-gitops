@@ -72,11 +72,6 @@ alertmanager:
               storage: 5Gi
 
 grafana:
-  additionalDataSources:
-    - name: Loki
-      type: loki
-      url: http://loki.loki.svc:3100
-
   admin:
     existingSecret: grafana-admin-credentials
     userKey: admin-user
