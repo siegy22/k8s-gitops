@@ -15,7 +15,7 @@ spec:
       serviceAccountName: about-me-sa
       containers:
       - name: web
-        image: siegy22/web:1.1.0
+        image: siegy22/web:1.2.0
         ports:
         - name: web-port
           containerPort: 8080
